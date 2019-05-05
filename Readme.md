@@ -2,6 +2,10 @@
 
 This is an unnofficial Typescript NodeJS sdk for VISA API's. Initially created at SmallBusinessWeek Hackathon 2019.
 
+[![NPM](https://nodei.co/npm/visa-sdk.png)](https://www.npmjs.com/package/visa-sdk)
+
+> Note: This SDK is only implemented for a subset of all the Visa REST API's. PR's welcome!
+
 Currently this SDK contains type definitons for the following API's:
 
 Complete:
