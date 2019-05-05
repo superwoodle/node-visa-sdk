@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "types": [
+            "node"
+        ],
+        "allowUnreachableCode": false,
+        "declaration": true,
+        "declarationMap": true,
+        "moduleResolution": "node",
+        "noImplicitAny": true,
+        "preserveConstEnums": true,
+        "removeComments": true,
+        "target": "ES6",
+        "inlineSourceMap": true,
+        "inlineSources": true,
+        "strict": true,
+        "pretty": true,
+    },
+    "exclude": [
+        "examples"
+    ],
+    "include": [
+        "src"
+    ]
+}
