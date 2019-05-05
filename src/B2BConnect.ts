@@ -69,7 +69,7 @@ export namespace B2BConnect {
                 unitNo: string;
                 city: string;
                 state: string;
-                zipCode: string;
+                zipCode: number;
                 countryDisplayName: string;
                 countryIsoCode: number;
             };
@@ -88,7 +88,7 @@ export namespace B2BConnect {
             authorizedSignatory: {
                 fullName: string;
                 nationalityCountryCodeISO: number;
-                countryOfResidenceCodeISO: string;
+                countryOfResidenceCodeISO: number;
             };
             ownershipDetails: {
                 fullName: string;
@@ -103,7 +103,7 @@ export namespace B2BConnect {
                 isIndividual: boolean;
                 isActive: boolean;
                 ownerIndividuals: any;
-            }
+            }[]
             remitProfile: {
                 deliveryMethod: string,
                 attachmentFormat: string,

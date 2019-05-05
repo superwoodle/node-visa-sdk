@@ -1,6 +1,6 @@
 {
   "name": "visa-sdk",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Visa API SDK",
   "main": "dist/library.js",
   "types": "dist/library.d.ts",
