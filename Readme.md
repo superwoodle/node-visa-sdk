@@ -1,6 +1,6 @@
 # Visa API SDK
 
-This is an unnofficial Typescript NodeJS sdk for VISA API's. Initially created at SmallBusinessWeek Hackathon 2019.
+This is an unnofficial Typescript NodeJS sdk for [VISA API](https://developer.visa.com/docs)'s. Initially created at SmallBusinessWeek Hackathon 2019.
 
 [![NPM](https://nodei.co/npm/visa-sdk.png)](https://www.npmjs.com/package/visa-sdk)
 
