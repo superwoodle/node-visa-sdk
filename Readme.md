@@ -1,3 +1,136 @@
 # Visa API SDK
 
 This is an unnofficial Typescript NodeJS sdk for VISA API's. Initially created at SmallBusinessWeek Hackathon 2019.
+
+Currently this SDK contains type definitons for the following API's:
+
+Complete:
+* Data and Analytics
+    * Merchant Search
+
+Partial:
+* Commercial
+    * Visa B2B Connect
+    * Visa B2B Virtual Account Payment Method
+* Visa DPS
+    * Visa DPS Card and Account Services 
+
+> Other API's may be typed as `any`;
+
+# Setup
+```bash
+yarn add visa-sdk
+# or
+npm install visa-sdk
+```
+
+# Authentication
+
+Visa API's use [Two way SSL](https://developer.visa.com/pages/working-with-visa-apis/two-way-ssl) and credentials to authenticate to their api. 
+
+To authenticate NodeJS to the Visa, you will need the following information:
+
+* `VISA_USER_ID` - a project User ID
+* `VISA_PASSWORD` - a project Password
+* `CERTIFICATE_PASSPHRASE` - your passphrase set when creating the `.p12` bundle
+* `CERTIFICATE_FILE` - the path to the `.p12` bundle file
+
+1. Crate a Project. While creating the project you will generate or upload a CSR file.
+2. Download the Certificate private key (`cert.pem`) from the the project `Credentials` page.
+3. Use the OpenSSL cli to bundle both the CSR and private key. You will encrypt the bundle by entering a passphrase. This passphrase is `CERTIFICATE_PASSPHRASE`.
+
+```bash
+openssl pkcs12 -export -in cert.pem -inkey "privateKey.pem" -certfile cert.pem -out myProject_keyAndCertBundle.p12
+```
+
+In the above example, the path to `myProject_keyAndCertBundle.p12` is `CERTIFICATE_FILE`
+
+3. After creating the project, the web interface will present you with both the generated `User ID` and `password`.
+
+# Usage
+### Hello World
+```typescript
+import { Visa } from 'visa-sdk';
+
+const credentials = {
+    userId: process.env.VISA_USER_ID,
+    password: process.env.VISA_PASSWORD,
+    certificate_passphrase: process.env.CERTIFICATE_PASSPHRASE,
+    certificate_file_path: process.env.CERTIFICATE_FILE
+};
+
+const visa = new Visa(credentials);
+visa.helloWorld().then(({ body, response }) => {
+    console.log(response.statusCode);
+    console.log(body);
+});
+```
+
+### Merchant Search
+```typescript
+import { MerchantSearch } from 'visa-sdk';
+
+const credentials = {
+    userId: process.env.VISA_USER_ID,
+    password: process.env.VISA_PASSWORD,
+    certificate_passphrase: process.env.CERTIFICATE_PASSPHRASE,
+    certificate_file_path: process.env.CERTIFICATE_FILE
+};
+
+const query: MerchantSearch.Query = {
+    searchAttrList: {
+        merchantName: "STARBUCKS",
+        merchantCity: "SAN FRANCISCO",
+        merchantState: "CA",
+        merchantPostalCode: 94127,
+        merchantCountryCode: 840
+    },
+    responseAttrList: [
+        "GNSTANDARD"
+    ],
+    searchOptions: {
+        wildCard: [
+            "merchantName"
+        ],
+        maxRecords: 5,
+        matchIndicators: true,
+        matchScore: true,
+        proximity: [
+            "merchantName"
+        ]
+    },
+    header: {
+        requestMessageId: "Request_001",
+        startIndex: 0,
+        messageDateTime: "2019-05-04T20:17:52.903"
+    }
+};
+merchantSearch.search(query).then(({ body, response }) => {
+    console.log(response.statusCode)
+    console.log(body.merchantSearchServiceResponse.response)
+});
+```
+
+# Development
+
+Setup:
+```bash
+yarn
+# --or--
+npm install
+```
+
+Build:
+```bash
+# Transpile typescript
+yarn build
+# Transpile on file changes
+yarn watch
+
+# --or--
+
+# Transpile typescript
+npm run build
+# Transpile on file changes
+npm run watch
+```
